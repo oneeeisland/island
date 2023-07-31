@@ -1,0 +1,218 @@
+https://blog.csdn.net/youzhouliu/article/details/78952453
+1.    mkdir testgit
+2.    pwd   //pwd 命令是用于显示当前的目录。
+/c/SL/git/testgit
+3.    git init
+Initialized empty Git repository in C:/SL/git/testgit/.git/         //通过命令 git init 把这个目录变成git可以管理的仓库
+4.    git add readme.txt     使用命令 git add readme.txt添加到暂存区里面去
+5.    git commit -m "readme.txt提交"
+[master (root-commit) 8617893] readme.txt提交
+ 1 file changed, 1 insertion(+)
+ create mode 100644 readme.txt    //用命令 git commit告诉Git，把文件提交到仓库
+6.    git status
+On branch master
+nothing to commit, working tree clean
+7.    git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   readme.txt   
+no changes added to commit (use "git add" and/or "git commit -a")    //修改后内容
+8.    git diff readme.txt
+diff --git a/readme.txt b/readme.txt
+index 7153628..111f1f8 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1 +1,2 @@
+-1111111
+\ No newline at end of file
++1111111
++2222222
+\ No newline at end of file    //看下readme.txt文件到底改了什么内容
+9.    git add readme.txt    //将修改后的添加到暂存区
+10.    git status    //提交前，查看一下状态
+11.    git commit -m "文件增加2222222内容"
+[master 7eef199] 文件增加2222222内容
+ 1 file changed, 2 insertions(+), 1 deletion(-)    //提交到仓库
+12.    git status
+On branch master
+nothing to commit, working tree clean    //提交后查看状态，显示没有可提交的文件
+13.    版本回退：
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git add readme.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git commit -m "文件增加3333333内容"
+[master 610f740] 文件增加3333333内容
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+13.1.        git log    //查看日志
+commit 610f740b8ed6e6d7aea7fc54341f40304c6b88e6 (HEAD -> master)
+Author: island <411821906@qq.com>
+Date:   Wed Jul 26 09:41:57 2023 +0800
+
+    文件增加3333333内容
+
+commit 7eef199ef7a7e005f12d6410c34e1f52f24f95b3
+Author: island <411821906@qq.com>
+Date:   Wed Jul 26 09:38:47 2023 +0800
+
+    文件增加2222222内容
+
+commit 8617893207c492c56b73873fd7c89c03ad8158a6
+Author: island <411821906@qq.com>
+Date:   Wed Jul 26 09:27:52 2023 +0800
+
+    readme.txt提交
+13.2.        如果嫌上面显示的信息太多的话，我们可以使用命令 git log  --pretty=oneline
+git log --pretty=oneline
+610f740b8ed6e6d7aea7fc54341f40304c6b88e6 (HEAD -> master) 文件增加3333333内容
+7eef199ef7a7e005f12d6410c34e1f52f24f95b3 文件增加2222222内容
+8617893207c492c56b73873fd7c89c03ad8158a6 readme.txt提交
+13.3.        git reset --hard HEAD^
+HEAD is now at 7eef199 文件增加2222222内容    //回退到上一个版本的命令
+13.4.        cat readme.txt
+1111111
+2222222    //再来查看下 readme.txt内容如下：通过命令cat readme.txt查看
+13.5.        git log
+commit 7eef199ef7a7e005f12d6410c34e1f52f24f95b3 (HEAD -> master)
+Author: island <411821906@qq.com>
+Date:   Wed Jul 26 09:38:47 2023 +0800
+
+    文件增加2222222内容
+
+commit 8617893207c492c56b73873fd7c89c03ad8158a6
+Author: island <411821906@qq.com>
+Date:   Wed Jul 26 09:27:52 2023 +0800
+
+    readme.txt提交    //查看一下日志
+13.6.        git reflog
+7eef199 (HEAD -> master) HEAD@{0}: reset: moving to HEAD^
+610f740 HEAD@{1}: commit: 文件增加3333333内容
+7eef199 (HEAD -> master) HEAD@{2}: commit: 文件增加2222222内容
+8617893 HEAD@{3}: commit (initial): readme.txt提交    //获得版本号
+13.7.        git reset --hard 610f740
+HEAD is now at 610f740 文件增加3333333内容    //通过版本号回退，使用命令方法
+14.    git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   readme.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")    // git status来查看下状态
+15.
+    Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git add readme.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git add test.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   readme.txt
+        new file:   test.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git commit -m "一次性提交所有文件，包括新建文件test.txt"
+[master a047093] 一次性提交所有文件，包括新建文件test.txt
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+ create mode 100644 test.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+16.    git checkout -- readme.txt    //可以丢弃工作区的修改
+17.    Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ cat readme.txt
+1111111
+2222222
+3333333
+4444444
+6666666
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git add readme.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git checkout -- readme.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ cat readme.txt
+1111111
+2222222
+3333333
+4444444
+6666666
+7777777
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git checkout -- readme.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ cat readme.txt
+1111111
+2222222
+3333333
+4444444
+6666666
+//通过撤销命令让其回到暂存区后的状态
+    Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git add b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git commit -m "添加b.txt文件"
+[master 30e679b] 添加b.txt文件
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ rm b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    b.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+    Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git add b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git commit -m "添加b.txt文件"
+[master 30e679b] 添加b.txt文件
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ rm b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    b.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git checkout -- b.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git checkout -- test.txt
+
+Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
+$ git checkout -- a.txt
+error: pathspec 'a.txt' did not match any file(s) known to git
+
