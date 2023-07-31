@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>超链接</title>
+	</head>
+	<body>
+		<!--
+			可以跳转页面
+			使用a标签
+			属性：
+				href:指定链接跳转的目标地址，可以是相对路径也可以是一个完整地址
+		-->
+		<a href="http://www.baidu.com">baidu </a>
+		&nbsp;
+		<a href="demo10.html">demo10</a>
+		
+		<!--
+			a标签中的target属性可以在指定位置打开链接
+				可选值：
+					_self, 表示在当前窗口中打开（默认值）
+					_blank,在新的窗口中打开链接
+					可以设置一个内联框架的name属性值，链接将会在指定的内联框架中打开
+		-->
+		<br />
+		<a href="demo08.html" target="picture" width="500px">点击</a>
+		<br />
+		<a href="http://www.baidu.com" target="blank">跳转到百度</a>
+		<br />
+		<iframe src="demo11.html" name="picture" width="500px" height="500px"></iframe>
+	</body>
+</html>

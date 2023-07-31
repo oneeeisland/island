@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>CSS</title>
+		<!--
+			内部样式表：
+			也可以将CSS样式编写到head中的style标签中
+				通过CSS选择器选中指定元素
+					可以将这些元素一起设置样式，可以进一步复用
+				将结构和表现进一步分离，推荐使用
+			
+		
+		<style type="text/css">
+			p{
+				color:red;
+				font-size:40px;
+			}
+			
+		</style>
+		-->
+		<!--
+			可以将样式表编写在外部的CSS文件中，然后用link标签引用这个文件
+			
+			将CSS样式统一编写到外部的样式表，完全结构和样式分离，可以在不同的页面中使用
+			最大限度的使样式复用，将样式统一写在样式表中，然后通过link标签引用，可以利用浏览器缓存
+			加快用户访问速度，最推荐
+		-->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		
+	</head>
+	<body>
+		<!--
+			可以将CSS样式编写到元素的style属性中
+				这样叫做内联样式
+				只对当前的元素起作用，不方便重复使用
+				也不大方便后期维护
+				
+				<p style="color:green;font-size:40px">好好学习，天天向上</p>
+		-->
+		<p>好好学习，天天向上</p>
+		<p>好好学习，天天向上</p>
+		<p>好好学习，天天向上</p>
+		<p>好好学习，天天向上</p>
+		<p>好好学习，天天向上</p>
+		
+	</body>
+</html>
