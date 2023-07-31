@@ -216,3 +216,7 @@ Admin@DESKTOP-RSGKQ97 MINGW64 /c/SL/git/testgit (master)
 $ git checkout -- a.txt
 error: pathspec 'a.txt' did not match any file(s) known to git
 
+git remote add origin https://github.com/tugenhua0707/testgit.git
+
+把本地库的内容推送到远程，使用 git push命令，实际上是把当前分支master推送到远程。
+
